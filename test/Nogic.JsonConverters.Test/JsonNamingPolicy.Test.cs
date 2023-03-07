@@ -16,7 +16,7 @@ public sealed class JsonLowerCaseNamingPolicyTest
     [InlineData("UPPER", "upper")]
     [InlineData("lower", "lower")]
     [InlineData("camelUPPER", "camel_upper")]
-    [InlineData("WithNumber123", "with_number_123")]
+    [InlineData("WithNumber123", "with_number123")]
     public void JsonLowerSnakeCaseNamingPolicy_ConvertName(string name, string expected)
         => new JsonLowerSnakeCaseNamingPolicy().ConvertName(name).Should().Be(expected);
 
@@ -33,7 +33,7 @@ public sealed class JsonLowerCaseNamingPolicyTest
     [InlineData("UPPER", "UPPER")]
     [InlineData("lower", "LOWER")]
     [InlineData("camelUPPER", "CAMEL_UPPER")]
-    [InlineData("WithNumber123", "WITH_NUMBER_123")]
+    [InlineData("WithNumber123", "WITH_NUMBER123")]
     public void JsonUpperSnakeCaseNamingPolicy_ConvertName(string name, string expected)
         => new JsonUpperSnakeCaseNamingPolicy().ConvertName(name).Should().Be(expected);
 
@@ -50,7 +50,7 @@ public sealed class JsonLowerCaseNamingPolicyTest
     [InlineData("UPPER", "upper")]
     [InlineData("lower", "lower")]
     [InlineData("camelUPPER", "camel-upper")]
-    [InlineData("WithNumber123", "with-number-123")]
+    [InlineData("WithNumber123", "with-number123")]
     public void JsonKebabCaseNamingPolicy_ConvertName(string name, string expected)
         => new JsonKebabCaseNamingPolicy().ConvertName(name).Should().Be(expected);
 }

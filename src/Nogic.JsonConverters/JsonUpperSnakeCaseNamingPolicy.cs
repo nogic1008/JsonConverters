@@ -1,13 +1,10 @@
 namespace Nogic.JsonConverters;
 
 /// <summary>Naming policy for UPPER_SNAKE_CASING.</summary>
-public sealed class JsonUpperSnakeCaseNamingPolicy : JsonNamingPolicyBase
+public sealed class JsonUpperSnakeCaseNamingPolicy : JsonSeparatorNamingPolicy
 {
     /// <summary>
     /// Initializes a new instance of <see cref="JsonUpperSnakeCaseNamingPolicy"/>
     /// </summary>
-    public JsonUpperSnakeCaseNamingPolicy() : base('_') { }
-
-    /// <inheritdoc/>
-    protected override char ConvertForWrite(bool isTopOfWord, char c) => char.ToUpperInvariant(c);
+    public JsonUpperSnakeCaseNamingPolicy() : base(false, '_') { }
 }
