@@ -18,6 +18,7 @@ env:
   DOTNET_VERSION: |
     6.x
     7.x
+    8.x
 
 jobs:
   lint:
@@ -40,6 +41,7 @@ jobs:
       dotnet-version: |
         6.x
         7.x
+        8.x
     secrets:
       PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
@@ -50,7 +52,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        framework: [net6.0, net7.0]
+        framework: [net6.0, net7.0, net8.0]
         include:
           - os: windows-latest
             framework: net48
