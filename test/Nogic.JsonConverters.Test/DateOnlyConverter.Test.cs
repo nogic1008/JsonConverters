@@ -46,13 +46,7 @@ public sealed class DateOnlyConverterTest
     [DataRow("yyyy/MM/dd", "\"2023/10/10 0:00:00.000+09:00\"")]
     [DataRow("MM/dd/yyyy g", "\"0001-01-01\"")]
     public void CannotDeserializeJson(string format, string json)
-    {
-        // Arrange - Act
-        Action action = () => JsonSerializer.Deserialize<DateOnly>(json, CreateOption(format));
-
-        // Assert
-        action.ShouldThrow<FormatException>();
-    }
+        => Should.Throw<FormatException>(() => JsonSerializer.Deserialize<DateOnly>(json, CreateOption(format)));
 
     /// <summary>
     /// <see cref="DateOnlyConverter.Write"/> writes <paramref name="expected"/>.

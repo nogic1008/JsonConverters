@@ -47,13 +47,7 @@ public class TimeOnlyConverterTest
     [DataRow("hh:mm:ss tt", "\"22:30:30\"")]
     [DataRow("HHmm", "\"22:00\"")]
     public void CannotDeserializeJson(string format, string json)
-    {
-        // Arrange - Act
-        Action action = () => JsonSerializer.Deserialize<TimeOnly>(json, CreateOption(format));
-
-        // Assert
-        action.ShouldThrow<FormatException>();
-    }
+        => Should.Throw<FormatException>(() => JsonSerializer.Deserialize<TimeOnly>(json, CreateOption(format)));
 
     /// <summary>
     /// <see cref="DateOnlyConverter.Write"/> writes <paramref name="expected"/>.

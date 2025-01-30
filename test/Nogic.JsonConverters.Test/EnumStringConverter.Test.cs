@@ -146,10 +146,7 @@ public sealed class EnumStringConverterTest
     // Disallow integer
     [DataRow(false, false, (TestForConvert)(-1))]
     public void CannotSerializeJson(bool allowInteger, bool useCamelCase, TestForConvert @enum)
-    {
-        Action action = () => JsonSerializer.Serialize(@enum, CreateOption(allowInteger, useCamelCase));
-        action.ShouldThrow<JsonException>();
-    }
+        => Should.Throw<JsonException>(() => JsonSerializer.Serialize(@enum, CreateOption(allowInteger, useCamelCase)));
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Read"/> returns <paramref name="expected"/>.
@@ -206,10 +203,7 @@ public sealed class EnumStringConverterTest
     [DataRow(false, false, "twotwo")]
     [DataRow(false, false, "\"One_one, TwoTwo\"")]
     public void CannotDeserializeJson(bool allowInteger, bool useCamelCase, string json)
-    {
-        Action action = () => JsonSerializer.Deserialize<TestForConvert>(json, CreateOption(allowInteger, useCamelCase));
-        action.ShouldThrow<JsonException>();
-    }
+        => Should.Throw<JsonException>(() => JsonSerializer.Deserialize<TestForConvert>(json, CreateOption(allowInteger, useCamelCase)));
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Write"/> writes <paramref name="expected"/>.
