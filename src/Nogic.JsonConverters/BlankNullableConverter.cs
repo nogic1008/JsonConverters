@@ -21,10 +21,8 @@ public class BlankNullableConverter<T>(JsonConverter<T> converter) : JsonConvert
     public override void Write(Utf8JsonWriter writer, T? value, JsonSerializerOptions options)
     {
         if (value is null)
-        {
             writer.WriteStringValue(string.Empty);
-            return;
-        }
-        converter.Write(writer, value.GetValueOrDefault(), options);
+        else
+            converter.Write(writer, value.GetValueOrDefault(), options);
     }
 }
