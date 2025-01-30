@@ -7,6 +7,9 @@ namespace Nogic.JsonConverters;
 
 /// <inheritdoc cref="EnumStringConverterFactory"/>
 /// <typeparam name="TEnum"><see langword="enum"/> type</typeparam>
+#if NET9_0_OR_GREATER
+[Obsolete("Use System.Text.Json.Serialization.JsonStringEnumMemberNameAttribute and System.Text.Json.Serialization.JsonStringEnumConverter<TEnum> instead.")]
+#endif
 public class EnumStringConverter<TEnum> : JsonConverter<TEnum> where TEnum : struct, Enum
 {
     /// <summary>Cashe of <see cref="TypeCode"/></summary>

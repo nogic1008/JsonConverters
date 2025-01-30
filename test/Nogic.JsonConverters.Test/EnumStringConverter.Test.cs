@@ -17,7 +17,13 @@ public sealed class EnumStringConverterTest
     private static JsonSerializerOptions CreateOption(bool allowInteger, bool useCamelCase)
         => new()
         {
+#if NET9_0_OR_GREATER
+#pragma warning disable CS0618
+#endif
             Converters = { new EnumStringConverterFactory(allowInteger, useCamelCase ? JsonNamingPolicy.CamelCase : null) }
+#if NET9_0_OR_GREATER
+#pragma warning restore CS0618
+#endif
         };
 
     /// <summary>For <see langword="sbyte"/> based testing</summary>
@@ -63,7 +69,13 @@ public sealed class EnumStringConverterTest
     [DataRow(typeof(TestEnumInt64))]
     [DataRow(typeof(TestEnumUInt64))]
     public void CanConvert_Returns_True(Type type)
+#if NET9_0_OR_GREATER
+#pragma warning disable CS0618
+#endif
         => new EnumStringConverterFactory().CanConvert(type).Should().BeTrue();
+#if NET9_0_OR_GREATER
+#pragma warning restore CS0618
+#endif
 
     /// <summary>
     /// <see cref="EnumStringConverterFactory.CanConvert"/> returns <see langword="false"/>.
@@ -75,7 +87,13 @@ public sealed class EnumStringConverterTest
     [DataRow(typeof(DateTime))]
     [DataRow(typeof(TestEnumInt32?))]
     public void CanConvert_Returns_False(Type type)
+#if NET9_0_OR_GREATER
+#pragma warning disable CS0618
+#endif
         => new EnumStringConverterFactory().CanConvert(type).Should().BeFalse();
+#if NET9_0_OR_GREATER
+#pragma warning restore CS0618
+#endif
 
     /// <summary>For JSON serialize & deserialize testing</summary>
     [Flags]
