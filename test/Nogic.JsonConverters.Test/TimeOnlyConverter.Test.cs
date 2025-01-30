@@ -35,7 +35,7 @@ public class TimeOnlyConverterTest
     [DataRow("hh:mm:ss tt", "\"10:00:00 PM\"", 22, 0, 0, 0)]
     [DataRow("HHmm", "\"2200\"", 22, 0, 0, 0)]
     public void CanDeserializeJson(string format, string json, int hour, int minute, int second, int millisecond)
-        => JsonSerializer.Deserialize<TimeOnly>(json, CreateOption(format)).Should().Be(new(hour, minute, second, millisecond));
+        => JsonSerializer.Deserialize<TimeOnly>(json, CreateOption(format)).ShouldBe(new(hour, minute, second, millisecond));
 
     /// <summary>
     /// <see cref="DateOnlyConverter.Read"/> throws error.
@@ -47,13 +47,7 @@ public class TimeOnlyConverterTest
     [DataRow("hh:mm:ss tt", "\"22:30:30\"")]
     [DataRow("HHmm", "\"22:00\"")]
     public void CannotDeserializeJson(string format, string json)
-    {
-        // Arrange - Act
-        var action = () => JsonSerializer.Deserialize<TimeOnly>(json, CreateOption(format));
-
-        // Assert
-        _ = action.Should().Throw<FormatException>();
-    }
+        => Should.Throw<FormatException>(() => JsonSerializer.Deserialize<TimeOnly>(json, CreateOption(format)));
 
     /// <summary>
     /// <see cref="DateOnlyConverter.Write"/> writes <paramref name="expected"/>.
@@ -68,5 +62,5 @@ public class TimeOnlyConverterTest
     [DataRow("HHmm", 22, 0, 0, "\"2200\"")]
     [DataRow("hh:mm:ss tt", 23, 59, 59, "\"11:59:59 PM\"")]
     public void CanSerializeJson(string format, int hour, int minute, int second, string expected)
-        => JsonSerializer.Serialize(new TimeOnly(hour, minute, second, 0), CreateOption(format)).Should().Be(expected);
+        => JsonSerializer.Serialize(new TimeOnly(hour, minute, second, 0), CreateOption(format)).ShouldBe(expected);
 }

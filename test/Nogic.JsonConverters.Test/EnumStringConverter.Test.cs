@@ -72,7 +72,7 @@ public sealed class EnumStringConverterTest
 #if NET9_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new EnumStringConverterFactory().CanConvert(type).Should().BeTrue();
+        => new EnumStringConverterFactory().CanConvert(type).ShouldBeTrue();
 #if NET9_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
@@ -90,7 +90,7 @@ public sealed class EnumStringConverterTest
 #if NET9_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new EnumStringConverterFactory().CanConvert(type).Should().BeFalse();
+        => new EnumStringConverterFactory().CanConvert(type).ShouldBeFalse();
 #if NET9_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
@@ -134,7 +134,7 @@ public sealed class EnumStringConverterTest
     [DataRow(false, false, TestForConvert.OneOne | TestForConvert.TwoTwo, "\"OneOne, TwoTwo\"")]
     [DataRow(false, false, TestForConvert.Four, "\"foo\"")]
     public void CanSerializeJson(bool allowInteger, bool useCamelCase, TestForConvert @enum, string expected)
-        => JsonSerializer.Serialize(@enum, CreateOption(allowInteger, useCamelCase)).Should().Be(expected);
+        => JsonSerializer.Serialize(@enum, CreateOption(allowInteger, useCamelCase)).ShouldBe(expected);
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Write"/> throws error.
@@ -146,10 +146,7 @@ public sealed class EnumStringConverterTest
     // Disallow integer
     [DataRow(false, false, (TestForConvert)(-1))]
     public void CannotSerializeJson(bool allowInteger, bool useCamelCase, TestForConvert @enum)
-    {
-        var action = () => JsonSerializer.Serialize(@enum, CreateOption(allowInteger, useCamelCase));
-        _ = action.Should().Throw<JsonException>();
-    }
+        => Should.Throw<JsonException>(() => JsonSerializer.Serialize(@enum, CreateOption(allowInteger, useCamelCase)));
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Read"/> returns <paramref name="expected"/>.
@@ -180,7 +177,7 @@ public sealed class EnumStringConverterTest
     [DataRow(false, false, "\"OneOne, TwoTwo\"", TestForConvert.OneOne | TestForConvert.TwoTwo)]
     [DataRow(false, false, "\"4\"", TestForConvert.Four)]
     public void CanDeserializeJson(bool allowInteger, bool useCamelCase, string json, TestForConvert expected)
-        => JsonSerializer.Deserialize<TestForConvert>(json, CreateOption(allowInteger, useCamelCase)).Should().Be(expected);
+        => JsonSerializer.Deserialize<TestForConvert>(json, CreateOption(allowInteger, useCamelCase)).ShouldBe(expected);
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Read"/> throws error.
@@ -206,10 +203,7 @@ public sealed class EnumStringConverterTest
     [DataRow(false, false, "twotwo")]
     [DataRow(false, false, "\"One_one, TwoTwo\"")]
     public void CannotDeserializeJson(bool allowInteger, bool useCamelCase, string json)
-    {
-        var action = () => JsonSerializer.Deserialize<TestForConvert>(json, CreateOption(allowInteger, useCamelCase));
-        _ = action.Should().Throw<JsonException>();
-    }
+        => Should.Throw<JsonException>(() => JsonSerializer.Deserialize<TestForConvert>(json, CreateOption(allowInteger, useCamelCase)));
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Write"/> writes <paramref name="expected"/>.
@@ -250,7 +244,7 @@ public sealed class EnumStringConverterTest
     [DataRow(TestEnumInt64.Max, "\"Max\"")]
     [DataRow(TestEnumUInt64.Max, "\"Max\"")]
     public void CanSerializeJson_Type(object @enum, string expected)
-        => JsonSerializer.Serialize(@enum, CreateOption(true, false)).Should().Be(expected);
+        => JsonSerializer.Serialize(@enum, CreateOption(true, false)).ShouldBe(expected);
 
     /// <summary>
     /// <see cref="EnumStringConverter{TEnum}.Read"/> returns expected <see langword="enum"/>.
@@ -285,6 +279,6 @@ public sealed class EnumStringConverterTest
         AssertDerialize(ulong.MaxValue.ToString(), TestEnumUInt64.Max);
 
         void AssertDerialize<T>(string json, T expected)
-            => JsonSerializer.Deserialize<T>(json, option).Should().Be(expected);
+            => JsonSerializer.Deserialize<T>(json, option).ShouldBe(expected);
     }
 }

@@ -3,6 +3,7 @@ namespace Nogic.JsonConverters.Test;
 /// <summary>
 /// Unit tests for classes that inherit from <see cref="JsonSeparatorNamingPolicy"/>.
 /// </summary>
+[TestClass]
 public sealed class JsonSeparatorNamingPolicyTest
 {
     /// <summary>Unit test for <see cref="JsonLowerSnakeCaseNamingPolicy"/></summary>
@@ -13,7 +14,7 @@ public sealed class JsonSeparatorNamingPolicyTest
     [DataRow("PascalCase", "pascal_case")]
     [DataRow("camelCase", "camel_case")]
     [DataRow("snake_case", "snake_case")]
-    [DataRow("kebab-case", "kebab_case")]
+    [DataRow("kebab-case", "kebab-case")]
     [DataRow("word  word", "word_word")]
     [DataRow("UPPER", "upper")]
     [DataRow("lower", "lower")]
@@ -23,7 +24,7 @@ public sealed class JsonSeparatorNamingPolicyTest
 #if NET8_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new JsonLowerSnakeCaseNamingPolicy().ConvertName(name).Should().Be(expected);
+        => new JsonLowerSnakeCaseNamingPolicy().ConvertName(name).ShouldBe(expected);
 #if NET8_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
@@ -36,7 +37,7 @@ public sealed class JsonSeparatorNamingPolicyTest
     [DataRow("PascalCase", "PASCAL_CASE")]
     [DataRow("camelCase", "CAMEL_CASE")]
     [DataRow("snake_case", "SNAKE_CASE")]
-    [DataRow("kebab-case", "KEBAB_CASE")]
+    [DataRow("kebab-case", "KEBAB-CASE")]
     [DataRow("word  word", "WORD_WORD")]
     [DataRow("UPPER", "UPPER")]
     [DataRow("lower", "LOWER")]
@@ -46,7 +47,7 @@ public sealed class JsonSeparatorNamingPolicyTest
 #if NET8_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new JsonUpperSnakeCaseNamingPolicy().ConvertName(name).Should().Be(expected);
+        => new JsonUpperSnakeCaseNamingPolicy().ConvertName(name).ShouldBe(expected);
 #if NET8_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
@@ -58,7 +59,7 @@ public sealed class JsonSeparatorNamingPolicyTest
     [DataRow("", "")]
     [DataRow("PascalCase", "pascal-case")]
     [DataRow("camelCase", "camel-case")]
-    [DataRow("snake_case", "snake-case")]
+    [DataRow("snake_case", "snake_case")]
     [DataRow("kebab-case", "kebab-case")]
     [DataRow("word  word", "word-word")]
     [DataRow("UPPER", "upper")]
@@ -69,7 +70,7 @@ public sealed class JsonSeparatorNamingPolicyTest
 #if NET8_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new JsonKebabCaseNamingPolicy().ConvertName(name).Should().Be(expected);
+        => new JsonKebabCaseNamingPolicy().ConvertName(name).ShouldBe(expected);
 #if NET8_0_OR_GREATER
 #pragma warning restore CS0618
 #endif

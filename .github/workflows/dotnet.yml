@@ -67,6 +67,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5.2.0
+        if: ${{ !cancelled() }}
         with:
           flags: ${{ runner.os }},${{ matrix.framework }}
           files: ./test/Nogic.JsonConverters.Test/bin/Debug/${{ matrix.framework }}/TestResults/${{ vars.COVERAGE_REPORT_FILE }}
