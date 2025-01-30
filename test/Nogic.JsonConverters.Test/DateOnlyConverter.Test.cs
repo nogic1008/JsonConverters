@@ -34,7 +34,7 @@ public sealed class DateOnlyConverterTest
     [DataRow("yy/MM/dd", "\"22/01/01\"", 2022, 1, 1)]
     [DataRow("MM/dd/yyyy g", "\"12/31/9999 A.D.\"", 9999, 12, 31)]
     public void CanDeserializeJson(string format, string json, int year, int month, int day)
-        => JsonSerializer.Deserialize<DateOnly>(json, CreateOption(format)).Should().Be(new(year, month, day));
+        => JsonSerializer.Deserialize<DateOnly>(json, CreateOption(format)).ShouldBe(new(year, month, day));
 
     /// <summary>
     /// <see cref="DateOnlyConverter.Read"/> throws error.
@@ -48,10 +48,10 @@ public sealed class DateOnlyConverterTest
     public void CannotDeserializeJson(string format, string json)
     {
         // Arrange - Act
-        var action = () => JsonSerializer.Deserialize<DateOnly>(json, CreateOption(format));
+        Action action = () => JsonSerializer.Deserialize<DateOnly>(json, CreateOption(format));
 
         // Assert
-        _ = action.Should().Throw<FormatException>();
+        action.ShouldThrow<FormatException>();
     }
 
     /// <summary>
@@ -67,5 +67,5 @@ public sealed class DateOnlyConverterTest
     [DataRow("yy/MM/dd", 2022, 1, 1, "\"22/01/01\"")]
     [DataRow("MM/dd/yyyy g", 9999, 12, 31, "\"12/31/9999 A.D.\"")]
     public void CanSerializeJson(string format, int year, int month, int day, string expected)
-        => JsonSerializer.Serialize(new DateOnly(year, month, day), CreateOption(format)).Should().Be(expected);
+        => JsonSerializer.Serialize(new DateOnly(year, month, day), CreateOption(format)).ShouldBe(expected);
 }

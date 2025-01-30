@@ -3,6 +3,7 @@ namespace Nogic.JsonConverters.Test;
 /// <summary>
 /// Unit tests for classes that inherit from <see cref="JsonSeparatorNamingPolicy"/>.
 /// </summary>
+[TestClass]
 public sealed class JsonSeparatorNamingPolicyTest
 {
     /// <summary>Unit test for <see cref="JsonLowerSnakeCaseNamingPolicy"/></summary>
@@ -23,7 +24,7 @@ public sealed class JsonSeparatorNamingPolicyTest
 #if NET8_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new JsonLowerSnakeCaseNamingPolicy().ConvertName(name).Should().Be(expected);
+        => new JsonLowerSnakeCaseNamingPolicy().ConvertName(name).ShouldBe(expected);
 #if NET8_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
@@ -46,7 +47,7 @@ public sealed class JsonSeparatorNamingPolicyTest
 #if NET8_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new JsonUpperSnakeCaseNamingPolicy().ConvertName(name).Should().Be(expected);
+        => new JsonUpperSnakeCaseNamingPolicy().ConvertName(name).ShouldBe(expected);
 #if NET8_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
@@ -69,7 +70,7 @@ public sealed class JsonSeparatorNamingPolicyTest
 #if NET8_0_OR_GREATER
 #pragma warning disable CS0618
 #endif
-        => new JsonKebabCaseNamingPolicy().ConvertName(name).Should().Be(expected);
+        => new JsonKebabCaseNamingPolicy().ConvertName(name).ShouldBe(expected);
 #if NET8_0_OR_GREATER
 #pragma warning restore CS0618
 #endif
