@@ -23,6 +23,9 @@ Implementation of `JsonConverter<DateOnly>` and `JsonConverter<TimeOnly>`.
 
 #### `EnumStringConverterFactory`, `EnumStringConverter<T>`
 
+> [!IMPORTANT]
+> *Obsolete*: Use built-in [`JsonStringEnumMemberNameAttribute`](https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonstringenummembernameattribute) on `System.Text.Json@9.0.0` (.NET 9.0) or higher.
+
 Implementation of `JsonConverterFactory` for `enum` that uses `JsonPropertyNameAttribute` and [`EnumMemberAttribute`](https://learn.microsoft.com/dotnet/api/system.runtime.serialization.enummemberattribute)
 
 #### `BlankNullableConverterFactory`, `BlankNullableConverter<T>`

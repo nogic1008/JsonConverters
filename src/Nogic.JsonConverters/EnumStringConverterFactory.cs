@@ -6,6 +6,9 @@ namespace Nogic.JsonConverters;
 /// When <see langword="true"/>, if an <see langword="enum"/> value isn't defined it will output as a number rather than a <see langword="string"/>.
 /// </param>
 /// <param name="namingPolicy">Naming policy of <see langword="enum"/> strings.</param>
+#if NET9_0_OR_GREATER
+[Obsolete("Use System.Text.Json.Serialization.JsonStringEnumMemberNameAttribute and System.Text.Json.Serialization.JsonStringEnumConverter<TEnum> instead.")]
+#endif
 public class EnumStringConverterFactory(bool allowIntegerValues = true, JsonNamingPolicy? namingPolicy = null) : JsonConverterFactory
 {
     /// <inheritdoc/>
